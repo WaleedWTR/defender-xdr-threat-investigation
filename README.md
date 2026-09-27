@@ -63,6 +63,15 @@ Scope affected users/devices
 Contain -> Remediate -> Recover
 ```
 
+## Key evidence and documentation
+
+- [Synthetic case study](docs/case-study.md)
+- [Investigation playbook](docs/investigation-playbook.md)
+- [Evidence template](docs/evidence-template.md)
+- [MITRE ATT&CK mapping](docs/mitre-attack-mapping.md)
+- [Synthetic indicators](data/synthetic_indicators.json)
+- [Technical references](docs/references.md)
+
 ## Skills demonstrated
 
 **Microsoft Defender XDR · Advanced Hunting · KQL · Endpoint Investigation · Identity Security · Incident Response · Python**
