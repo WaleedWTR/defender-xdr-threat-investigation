@@ -1,5 +1,7 @@
 # Defender XDR Threat Investigation
 
+![Timeline tests](https://github.com/WaleedWTR/defender-xdr-threat-investigation/actions/workflows/tests.yml/badge.svg)
+
 A portfolio incident-investigation lab demonstrating how Microsoft Defender XDR telemetry can be used to reconstruct a suspicious endpoint and identity timeline.
 
 > **Portfolio note:** The incident, users, devices and indicators in this repository are synthetic. No real organisation or production evidence is included.
