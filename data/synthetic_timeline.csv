@@ -1,0 +1,8 @@
+timestamp,device,user,event_type,process_or_action,detail
+2026-09-20T09:14:02Z,WKSTN-LAB-01,user1@example.invalid,process,winword.exe,Opened synthetic invoice document
+2026-09-20T09:14:08Z,WKSTN-LAB-01,user1@example.invalid,process,powershell.exe,Encoded command launched by winword.exe
+2026-09-20T09:14:12Z,WKSTN-LAB-01,user1@example.invalid,network,powershell.exe,Connection to 203.0.113.77:443
+2026-09-20T09:15:01Z,WKSTN-LAB-01,user1@example.invalid,file,temp-stage.bin,Synthetic payload written to temp path
+2026-09-20T09:21:40Z,IDENTITY,user1@example.invalid,signin,interactive,Successful sign-in from 198.51.100.25
+2026-09-20T09:23:15Z,IDENTITY,user1@example.invalid,signin,interactive,Failed sign-in from 198.51.100.90
+2026-09-20T09:24:01Z,IDENTITY,user1@example.invalid,signin,interactive,Failed sign-in from 198.51.100.90
