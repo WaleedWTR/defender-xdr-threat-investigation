@@ -1,0 +1,26 @@
+// Office spawning a shell or script interpreter
+DeviceProcessEvents
+| where TimeGenerated > ago(7d)
+| where InitiatingProcessFileName in~ ("winword.exe", "excel.exe", "powerpnt.exe", "outlook.exe")
+| where FileName in~ ("cmd.exe", "powershell.exe", "pwsh.exe", "wscript.exe", "cscript.exe", "mshta.exe")
+| project TimeGenerated, DeviceName, AccountName,
+          InitiatingProcessFileName, FileName, ProcessCommandLine,
+          SHA1, InitiatingProcessSHA1
+| order by TimeGenerated desc;
+
+// Encoded PowerShell
+DeviceProcessEvents
+| where TimeGenerated > ago(7d)
+| where FileName in~ ("powershell.exe", "pwsh.exe")
+| where ProcessCommandLine has_any ("-enc", "-encodedcommand", "FromBase64String")
+| project TimeGenerated, DeviceName, AccountName, ProcessCommandLine,
+          InitiatingProcessFileName, InitiatingProcessCommandLine
+| order by TimeGenerated desc;
+
+// Network activity from PowerShell
+DeviceNetworkEvents
+| where TimeGenerated > ago(7d)
+| where InitiatingProcessFileName in~ ("powershell.exe", "pwsh.exe")
+| project TimeGenerated, DeviceName, RemoteUrl, RemoteIP, RemotePort,
+          InitiatingProcessAccountName, InitiatingProcessCommandLine
+| order by TimeGenerated desc;
