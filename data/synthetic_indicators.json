@@ -1,0 +1,25 @@
+{
+  "case": "LAB-XDR-001",
+  "indicators": [
+    {
+      "type": "ip",
+      "value": "203.0.113.77",
+      "classification": "synthetic-suspicious"
+    },
+    {
+      "type": "ip",
+      "value": "198.51.100.90",
+      "classification": "synthetic-suspicious"
+    },
+    {
+      "type": "device",
+      "value": "WKSTN-LAB-01",
+      "classification": "synthetic-affected"
+    },
+    {
+      "type": "account",
+      "value": "user1@example.invalid",
+      "classification": "synthetic-affected"
+    }
+  ]
+}
