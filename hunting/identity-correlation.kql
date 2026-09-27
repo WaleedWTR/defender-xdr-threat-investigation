@@ -1,18 +1,31 @@
+// Microsoft Defender XDR Advanced Hunting
+// Uses EntraIdSignInEvents, the replacement for AADSignInEventsBeta.
+
 // Identity events near the endpoint investigation window
 let StartTime = datetime(2026-09-20T09:00:00Z);
 let EndTime = datetime(2026-09-20T11:00:00Z);
 let InvestigatedUser = "user1@example.invalid";
-AADSignInEventsBeta
+EntraIdSignInEvents
 | where Timestamp between (StartTime .. EndTime)
 | where AccountUpn =~ InvestigatedUser
 | project Timestamp, AccountUpn, IPAddress, Country, Application,
-          LogonType, ErrorCode
+          LogonType, ErrorCode, RiskLevelDuringSignIn, ConditionalAccessStatus
 | order by Timestamp asc;
 
 // Failed sign-in activity by account
-AADSignInEventsBeta
+EntraIdSignInEvents
 | where Timestamp > ago(24h)
 | where ErrorCode != 0
-| summarize Failures=count(), SourceIPs=make_set(IPAddress, 20) by AccountUpn
+| summarize Failures=count(), SourceIPs=make_set(IPAddress, 20), Countries=make_set(Country, 20)
+    by AccountUpn
 | where Failures >= 5
 | order by Failures desc;
+
+// Higher-risk sign-ins for investigation
+EntraIdSignInEvents
+| where Timestamp > ago(24h)
+| where RiskLevelDuringSignIn >= 50 or RiskLevelAggregated >= 50
+| project Timestamp, AccountUpn, IPAddress, Country, Application,
+          RiskLevelDuringSignIn, RiskLevelAggregated, RiskState,
+          IsManaged, IsCompliant
+| order by Timestamp desc;
